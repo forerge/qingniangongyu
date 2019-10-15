@@ -65,7 +65,7 @@
 				// console.log(this.$refs.textareaColumnFrameEle.textareaVal);
 				console.log(this.timestamp);
 				uni.request({
-					url: this.serverApiUrl+'home/meet/add', //请求url
+					url: this.serverApiUrl+'home/meet/qing_add', //请求url
 					method: 'POST',               //请求方式 
 					data: {
 						u_id:this.u_id,
@@ -76,9 +76,9 @@
 					success: res => {   //成功执行回调函数
 						if(res.statusCode==200){
 							if(res.data == 1){
-								uni.navigateTo({
-								    url: '../weijiahaofang/weijiahaofang'
-								});
+								// uni.navigateTo({
+								//     url: '../weijiahaofang/weijiahaofang'
+								// });
 							}
 	
 						}else{ 

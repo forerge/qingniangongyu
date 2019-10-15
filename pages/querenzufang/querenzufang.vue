@@ -379,7 +379,7 @@ export default {
 			};
 			uni.setStorageSync('weijia_order_list', list);
 			uni.navigateTo({
-			    url: '../wodehetong/wodehetong2',
+			    url: '../wodehetong/wodehetong-data',
 			})
 		}
 	}

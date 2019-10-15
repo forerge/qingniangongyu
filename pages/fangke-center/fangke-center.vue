@@ -6,18 +6,6 @@
 							<image class="img" :src="serverImgUrl+'head.png'"></image>
 							<text class="text">昵称</text>
 						</view>
-						<view class="grid-list grid-row-align-right-center">
-							<view class="turnBtn" @tap="showRoleTurn"  v-if="rolechange == true">
-								<text>
-									切换身份	
-								</text>
-							</view>
-							<view class="turnBtn" v-else>
-								<text>
-									没有身份切换		
-								</text>
-							</view>
-						</view>
 					</view>
 					<!-- 波浪 -->
 					<view class="water-group">
@@ -26,24 +14,6 @@
 			<view class="water water3" :style="'background-image: url('+serverImgUrl+'wave-yellow.png)'"></view>
 					</view>
 					
-		</view>
-		<view class="grid grid-col-4 user-record">
-			<view class="grid-list grid-col-align-center">
-				<text class="num">0</text>
-				<text class="title">我的发布</text>
-			</view>
-			<view class="grid-list grid-col-align-center">
-				<text class="num">0</text>
-				<text class="title">收藏房源</text>
-			</view>
-			<view class="grid-list grid-col-align-center">
-				<text class="num">0</text>
-				<text class="title">联系记录</text>
-			</view>
-			<view class="grid-list grid-col-align-center">
-				<text class="num">0</text>
-				<text class="title">最近浏览</text>
-			</view>
 		</view>
 		<!-- 个人服务 -->
 		<columnTitle columnTitle="个人服务" borderTopColor="#fff"/>
@@ -85,32 +55,12 @@
 				<text class="text">到期交租</text>
 			</view>
 			<view class="grid-list grid-col-align-center">
-				<image  class="img" :src="serverImgUrl+'fangke-gerenfuwu010.png'"></image>
-				<text class="text">找室友</text>
-			</view>
-			<view class="grid-list grid-col-align-center" @click="renzheng">
-				<image  class="img" :src="serverImgUrl+'fangke-gerenfuwu011.png'"></image>
-				<text class="text">我的认证</text>
-			</view>
-			<view class="grid-list grid-col-align-center">
 				<image  class="img" :src="serverImgUrl+'fangke-gerenfuwu012.png'"></image>
 				<text class="text">账单查询</text>
 			</view>
 		</view>
 		<radio-group>
 		<view class="grid grid-col-2 roleSelect">
-			<!-- <view class="grid-list grid-row-align-left-center">
-				职业房东
-			</view>
-			<view class="grid-list grid-col-align-right-center">
-					<radio value="v1"  color="#F97F36" />
-			</view>
-			<view class="grid-list grid-row-align-left-center">
-				经纪人
-			</view>
-			<view class="grid-list grid-col-align-right-center">
-				<radio value="v2"  color="#F97F36" />
-			</view> -->
 			<view class="grid-list grid-combine-col-2 grid-col-align-left-center" @tap="showMask">
 				联系客服
 			</view>
@@ -131,19 +81,15 @@
 				</view>
 			</view>
 		</view>
-		
-		<!-- 切换身份弹框-->
-		   <roleTurn :showRoleTurn="roleTurn" />
 	</view>
 </template>
 
 <script>
 	import columnTitle from "../../components/dzy-column-title/dzy-column-title.vue";
-	import roleTurn from "../../components/dzy-role-turn/dzy-role-turn.vue";
+	
 	export default {
 		components:{
 			columnTitle,
-			roleTurn
 		},
 		data() {
 			return {
@@ -152,7 +98,6 @@
 				serverApiUrl:this.$commonConfig.serverApiUrl,
 				//客服弹框显示隐藏
 				active:false,
-				roleTurn:false,
 				rolechange:false,
 			}
 		},
@@ -173,53 +118,44 @@
 			showMask(){
 				this.active=true;
 			},
-			//显示切换身份弹框
-			showRoleTurn(){
-				this.roleTurn=true;
-			},
 			wodeyuyue(){
 				uni.navigateTo({
-				    url: '../wodeyuyue/wodeyuyue?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../wodeyuyue/wodeyuyue'
 				});
 			},
 			baojie(){
 				uni.navigateTo({
-				    url: '../baojie-order/baojie-order?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../baojie-order/baojie-order'
 				});
 			},
 			hetong(){
 				uni.navigateTo({
-				    url: '../wodehetong/wodehetong1?id='+uni.getStorageSync('weijia_pro')['u_id']
-				});
-			},
-			renzheng(){
-				uni.navigateTo({
-				    url: '../woderenzheng/woderenzheng?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../wodehetong/wodehetong-list'
 				});
 			},
 			qianbao(){
 				uni.navigateTo({
-				    url: '../wodeqianbao/wodeqianbao?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../wodeqianbao/wodeqianbao'
 				});
 			},
 			yuanchengkaimen(){
 				uni.navigateTo({
-				    url: '../yuanchengkaimen/yuanchengkaimen?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../yuanchengkaimen/yuanchengkaimen'
 				});
 			},
 			fuliquan(){
 				uni.navigateTo({
-				    url: '../fuliquan/fuliquan-unused?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../fuliquan/fuliquan-unused'
 				});
 			},
 			shuidianfei(){
 				uni.navigateTo({
-				    url: '../shuidianjiaofei/shuidianjiaofei?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../shuidianjiaofei/shuidianjiaofei'
 				});
 			},
 			daoqijiaozu(){
 				uni.navigateTo({
-				    url: '../jiaozu-order/jiaozu-order?id='+uni.getStorageSync('weijia_pro')['u_id']
+				    url: '../jiaozu-order/jiaozu-order'
 				});
 			}
 		},

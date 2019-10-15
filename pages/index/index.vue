@@ -44,47 +44,11 @@
 				<text>合租</text>
 			</view>
 		</view>
-		<view class="grid-list">
-			<navigator url="../fangyuanshangchuan/fangyuanshangchuan" open-type="switchTab" hover-class="none">
-			<image :src="serverImgUrl+'nav04.png'" ></image>
-			<text>上传房源</text>
-			 </navigator>
-		</view>
-		<view class="grid-list" @click="zhiyefangdong">
-			<view hover-class="none">
-				<image :src="serverImgUrl+'nav05.png'" ></image>
-				<text>职业房东</text>
-			</view>
-		</view>
-		<view class="grid-list" @click="jingjiren" >
-			<view hover-class="none">
-				<image :src="serverImgUrl+'nav06.png'" ></image>
-				<text>职业经纪人</text>
-			</view>
-		</view>
-		<view class="grid-list">
-			<navigator url="../fangdongweituo/fangdongweituo1" hover-class="none">
-			<image :src="serverImgUrl+'nav07.png'" ></image>
-			<text>房东委托</text>
-			</navigator>
-		</view>
 		<view class="grid-list" @click="wodeyuyue">
 			<view hover-class="none">
 				<image :src="serverImgUrl+'nav08.png'" ></image>
 				<text>我的预约</text>
 			</view>
-		</view>
-		<view class="grid-list" @click="wuyejiaojie">
-			<view hover-class="none">
-			<image :src="serverImgUrl+'nav09.png'" ></image>
-			<text>物业交接</text>
-			 </view>
-		</view>
-		<view class="grid-list">
-			<navigator url="../zhaoshiyou/zhaoshiyou" hover-class="none">
-			<image :src="serverImgUrl+'nav010.png'" ></image>
-			<text>找室友</text>
-			 </navigator>
 		</view>
 		<view class="grid-list" @click="wodehetong">
 			<view hover-class="none">
@@ -164,27 +128,17 @@
 		onLoad() {
 			console.log(uni.getStorageSync('weijia_status'));
 			console.log(uni.getStorageSync('weijia_role'));
-			console.log(uni.getStorageSync('weijia_pro')['u_tname']);
+			console.log(uni.getStorageSync('weijia_pro')['u_phone']);
 			this.status = uni.getStorageSync('weijia_status');
-			if(this.status == true){
-				this.role = uni.getStorageSync('weijia_role')
-			}
-			
-			// console.log(this.role)
-			// console.log(this.status)
-			//执行uni-app提供的类似ajax异步加载
 			uni.request({ 
-				url: this.serverApiUrl+'home/house/kuai_hot', //请求url
+				url: this.serverApiUrl+'home/house/qing_hot', //请求url
 				method: 'POST',               //请求方式 
 				data: {},                     //传递的数据
 				success: res => {   //成功执行回调函数
 					if(res.statusCode==200){
 						// var result = JSON.parse(res.data)
-						// console.log();
-						// console.log(res.data['house']);
 						this.tuijianContent= res.data['house'];
 						this.banner = res.data['banner']
-						
 					}else{ 
 						// console.log(res);
 					}
@@ -208,9 +162,7 @@
 					},                     //传递的数据
 					success: res => {   //成功执行回调函数
 						if(res.statusCode==200){
-							uni.setStorageSync('weijia_pro', uni.getStorageSync('weijia_status'));
 							uni.setStorageSync('weijia_pro', res.data);
-							// uni.setStorageSync('weijia_role',role);
 						}
 					},
 					fail: () => {},
@@ -255,37 +207,8 @@
 					    url: '../login/login'
 					});
 				}else{
-					if(uni.getStorageSync('weijia_role') == 1){
-						uni.navigateTo({
-							url: '../wodehetong/wodehetong1'
-						});
-					}else{
-						uni.navigateTo({
-							url: '../wodehetong/fangdonghetong'
-						});
-					}
-					
-				}
-			},
-			jingjiren(){
-				if(uni.getStorageSync('weijia_status') == false){
 					uni.navigateTo({
-					    url: '../login/login'
-					});
-				}else{
-					uni.navigateTo({
-						url: '../jingjirenjiaru/jingjirenjiaru?id='+uni.getStorageSync('weijia_pro')['u_id']
-					});
-				}
-			},
-			zhiyefangdong(){
-				if(uni.getStorageSync('weijia_status') == false){
-					uni.navigateTo({
-					    url: '../login/login'
-					});
-				}else{
-					uni.navigateTo({
-						url: '../zhiyefangdongruzhu/zhiyefangdongruzhu?id='+uni.getStorageSync('weijia_pro')['u_id']
+						url: '../wodehetong/wodehetong-list'
 					});
 				}
 			},
@@ -318,24 +241,7 @@
 					});
 				}
 			},
-			wuyejiaojie(){
-				if(uni.getStorageSync('weijia_status') == false){
-					uni.navigateTo({
-					    url: '../login/login'
-					});
-				}else{
-					if(uni.getStorageSync('weijia_role')){
-						uni.navigateTo({
-							url: '../wuyejiaojie/wuyejiaojie-fangke-list'
-						});
-					}else{
-						uni.navigateTo({
-							url: '../wuyejiaojie/wuyejiaojie-fangdong-list'
-						});
-					}
-					
-				}
-			}
+			
 		}, 
 	
 	}
